@@ -31,6 +31,35 @@
 $ npm install
 ```
 
+## Environment Variables
+
+This project uses the following environment variables with clear naming conventions:
+
+### Port Configuration
+- **`HTTP_API_PORT`**: Port for external HTTP API access (e.g., 3000, 3001, 3002)
+- **`MICROSERVICE_TCP_PORT`**: Port for internal microservice communication via TCP (e.g., 4000, 4001)
+
+### Service Communication
+- **`AUTH_HOST`**: Hostname for auth service (e.g., 'auth')
+- **`AUTH_PORT`**: TCP port for auth service communication (e.g., 4000)
+- **`PAYMENTS_HOST`**: Hostname for payments service (e.g., 'payments')
+- **`PAYMENTS_PORT`**: TCP port for payments service communication (e.g., 4001)
+
+### Example Configuration
+```bash
+# Reservations Service
+HTTP_API_PORT=3000
+MICROSERVICE_TCP_PORT=4001
+
+# Auth Service  
+HTTP_API_PORT=3001
+MICROSERVICE_TCP_PORT=4000
+
+# Payments Service
+HTTP_API_PORT=3002
+MICROSERVICE_TCP_PORT=4001
+```
+
 ## Compile and run the project
 
 ```bash

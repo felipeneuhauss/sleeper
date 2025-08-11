@@ -9,6 +9,7 @@ services:
       - ./apps/reservations/.env
     ports:
       - 3000:3000
+      - 4003:4003
     volumes:
       - .:/usr/src/app
 
@@ -22,6 +23,35 @@ services:
       - ./apps/auth/.env
     ports:
       - 3001:3001
+      - 4000:4000
+    volumes:
+      - .:/usr/src/app
+
+  payments:
+    build:
+      context: .
+      dockerfile: ./apps/payments/Dockerfile
+      target: development
+    command: pnpm run start:dev payments
+    env_file:
+      - ./apps/payments/.env
+    ports:
+      - 3002:3002
+      - 4001:4001
+    volumes:
+      - .:/usr/src/app
+
+  notifications:
+    build:
+      context: .
+      dockerfile: ./apps/notifications/Dockerfile
+      target: development
+    command: pnpm run start:dev notifications
+    env_file:
+      - ./apps/notifications/.env
+    ports:
+      - 3003:3003
+      - 4002:4002
     volumes:
       - .:/usr/src/app
 

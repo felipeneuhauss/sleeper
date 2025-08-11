@@ -2,13 +2,13 @@ import { PartialType } from '@nestjs/mapped-types';
 import { CreateReservationDto } from './create-reservation.dto';
 
 export class UpdateReservationDto extends PartialType(CreateReservationDto) {
-    startDate: Date;
+  startDate: string;
 
-    endDate: Date;
+  endDate: string;
 
-    userId: string;
+  userId: string;
 
-    placeId: string;
+  placeId: string;
 
-    invoiceId: string;
+  invoiceId: string;
 }

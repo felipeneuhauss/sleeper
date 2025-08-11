@@ -15,11 +15,11 @@ async function bootstrap() {
     transport: Transport.TCP,
     options: {
       host: '0.0.0.0',
-      port: configService.get('TCP_PORT') || 4000,
+      port: configService.get<number>('TCP_PORT'),
     },
   });
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   await app.startAllMicroservices();
-  await app.listen(configService.get('HTTP_PORT') || 3001, '0.0.0.0');
+  await app.listen(configService.get<number>('HTTP_PORT') || 3001, '0.0.0.0');
 }
 bootstrap();
