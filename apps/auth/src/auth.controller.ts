@@ -1,7 +1,7 @@
+import { CurrentUser } from '@app/common';
 import { Controller, Post, Request, Res, UseGuards } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { Response } from 'express';
-import { CurrentUser } from '../../../libs/common/src/decorators/current-user.decorator';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserEntity } from './users/entities/users.entity';

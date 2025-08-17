@@ -27,6 +27,7 @@ describe('PaymentsController', () => {
         exp_year: 2025,
         cvc: '123',
       },
+      email: 'test@test.com',
     });
 
     expect(charge).toBeDefined();

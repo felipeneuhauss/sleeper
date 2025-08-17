@@ -1,0 +1,40 @@
+steps:
+  # Auth
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west3-docker.pkg.dev/sleeper-468902/auth/production', '-f', 'apps/auth/Dockerfile', '.']
+    id: 'build-auth'
+    waitFor: ['-']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west3-docker.pkg.dev/sleeper-468902/auth/production']
+    id: 'push-auth'
+    waitFor: ['build-auth']
+
+  # Reservations
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west3-docker.pkg.dev/sleeper-468902/reservations/production', '-f', 'apps/reservations/Dockerfile', '.']
+    id: 'build-reservations'
+    waitFor: ['-']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west3-docker.pkg.dev/sleeper-468902/reservations/production']
+    id: 'push-reservations'
+    waitFor: ['build-reservations']
+
+  # Payments
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west3-docker.pkg.dev/sleeper-468902/payments/production', '-f', 'apps/payments/Dockerfile', '.']
+    id: 'build-payments'
+    waitFor: ['-']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west3-docker.pkg.dev/sleeper-468902/payments/production']
+    id: 'push-payments'
+    waitFor: ['build-payments']
+
+  # Notifications 
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west3-docker.pkg.dev/sleeper-468902/notifications/production', '-f', 'apps/notifications/Dockerfile', '.']
+    id: 'build-notifications'
+    waitFor: ['-']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west3-docker.pkg.dev/sleeper-468902/notifications/production']
+    id: 'push-notifications'
+    waitFor: ['build-notifications']

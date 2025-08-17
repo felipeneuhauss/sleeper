@@ -125,3 +125,34 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+### Google Artifact Deploy
+
+Reservation
+```
+$ cd /Users/fnaraujo/Workspace/pocs/sleeper && docker build -t reservations -f apps/reservations/Dockerfile .
+$ docker tag reservations europe-west3-docker.pkg.dev/sleeper-468902/reservations
+$ docker tag reservations europe-west3-docker.pkg.dev/sleeper-468902/reservations/production
+$ docker image push europe-west3-docker.pkg.dev/sleeper-468902/reservations/production
+```
+Auth
+```
+$ cd /Users/fnaraujo/Workspace/pocs/sleeper && docker build -t auth -f apps/auth/Dockerfile .
+$ docker tag auth europe-west3-docker.pkg.dev/sleeper-468902/auth
+$ docker tag auth europe-west3-docker.pkg.dev/sleeper-468902/auth/production
+$ docker image push europe-west3-docker.pkg.dev/sleeper-468902/auth/production
+```
+
+```
+$ cd /Users/fnaraujo/Workspace/pocs/sleeper && docker build -t payments -f apps/payments/Dockerfile .
+$ docker tag payments europe-west3-docker.pkg.dev/sleeper-468902/payments
+$ docker tag payments europe-west3-docker.pkg.dev/sleeper-468902/payments/production
+$ docker image push europe-west3-docker.pkg.dev/sleeper-468902/payments/production
+```
+
+```
+$ cd /Users/fnaraujo/Workspace/pocs/sleeper && docker build -t notifications -f apps/notifications/Dockerfile .
+$ docker tag notifications europe-west3-docker.pkg.dev/sleeper-468902/notifications
+$ docker tag notifications europe-west3-docker.pkg.dev/sleeper-468902/notifications/production
+$ docker image push europe-west3-docker.pkg.dev/sleeper-468902/notifications/production
+```
