@@ -1,39 +1,46 @@
 steps:
-  # Auth
+  # Install dependencies and run all tests
+  - name: 'node:18'
+    entrypoint: 'sh'
+    args: ['-c', 'npm install -g pnpm@9 && pnpm install && pnpm test']
+    id: 'test-all'
+    waitFor: ['-']
+
+  # Build Auth (only after tests pass)
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'europe-west3-docker.pkg.dev/sleeper-468902/auth/production', '-f', 'apps/auth/Dockerfile', '.']
     id: 'build-auth'
-    waitFor: ['-']
+    waitFor: ['test-all']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west3-docker.pkg.dev/sleeper-468902/auth/production']
     id: 'push-auth'
     waitFor: ['build-auth']
 
-  # Reservations
+  # Build Reservations (only after tests pass)
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'europe-west3-docker.pkg.dev/sleeper-468902/reservations/production', '-f', 'apps/reservations/Dockerfile', '.']
     id: 'build-reservations'
-    waitFor: ['-']
+    waitFor: ['test-all']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west3-docker.pkg.dev/sleeper-468902/reservations/production']
     id: 'push-reservations'
     waitFor: ['build-reservations']
 
-  # Payments
+  # Build Payments (only after tests pass)
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'europe-west3-docker.pkg.dev/sleeper-468902/payments/production', '-f', 'apps/payments/Dockerfile', '.']
     id: 'build-payments'
-    waitFor: ['-']
+    waitFor: ['test-all']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west3-docker.pkg.dev/sleeper-468902/payments/production']
     id: 'push-payments'
     waitFor: ['build-payments']
 
-  # Notifications 
+  # Build Notifications (only after tests pass)
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'europe-west3-docker.pkg.dev/sleeper-468902/notifications/production', '-f', 'apps/notifications/Dockerfile', '.']
     id: 'build-notifications'
-    waitFor: ['-']
+    waitFor: ['test-all']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west3-docker.pkg.dev/sleeper-468902/notifications/production']
     id: 'push-notifications'
